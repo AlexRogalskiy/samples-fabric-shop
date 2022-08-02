@@ -10,8 +10,5 @@
 # limitations under the License.
 
 resources:
-  - namespace.yaml
-  - cassandra
-  - customers
-
-namespace: pet-store-sample
+  - stateful-set.yaml
+  - service.yaml

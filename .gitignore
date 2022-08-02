@@ -9,9 +9,5 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-resources:
-  - namespace.yaml
-  - cassandra
-  - customers
-
-namespace: pet-store-sample
+# IDEs
+.idea/

@@ -9,9 +9,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-resources:
-  - namespace.yaml
-  - cassandra
-  - customers
-
-namespace: pet-store-sample
+cassandra:
+  keyspace: testKeyspace
+  port: 9042
+  contactPoints: cassandra

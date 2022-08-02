@@ -27,6 +27,16 @@ spec:
       containers:
       - image: nadunrds/samples-pet-store-customers
         name: customers-service
+        env:
+        - name: SPRING_CONFIG_LOCATION
+          value: "/app/config/app-conf.yaml"
         ports:
         - containerPort: 8080
           name: rest-api
+        volumeMounts:
+        - name: config-volume
+          mountPath: /app/config
+      volumes:
+      - name: config-volume
+        configMap:
+          name: customers-conf        

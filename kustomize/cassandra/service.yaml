@@ -9,9 +9,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-resources:
-  - namespace.yaml
-  - cassandra
-  - customers
-
-namespace: pet-store-sample
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    component: cassandra
+  name: cassandra
+spec:
+  clusterIP: None
+  selector:
+    component: cassandra
+  ports:
+  - name: cql
+    port: 9042
+    targetPort: cql

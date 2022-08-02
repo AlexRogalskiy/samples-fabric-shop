@@ -12,4 +12,7 @@
 resources:
   - deployment.yaml
 
-namespace: pet-store-sample
+configMapGenerator:
+- name: customers-conf
+  files:
+  - app-conf.yaml

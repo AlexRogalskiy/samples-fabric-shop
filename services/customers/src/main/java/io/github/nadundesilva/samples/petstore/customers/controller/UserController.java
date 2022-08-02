@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.github.nadundesilva.samples.petstore.customers;
+package io.github.nadundesilva.samples.petstore.customers.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
