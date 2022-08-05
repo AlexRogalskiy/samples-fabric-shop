@@ -10,6 +10,7 @@
 # limitations under the License.
 
 cassandra:
-  keyspace: testKeyspace
+  keyspace: customers
   port: 9042
   contactPoints: cassandra
+  localDataCenter: pet-store-sample-dc
