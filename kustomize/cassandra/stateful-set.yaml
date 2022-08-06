@@ -29,33 +29,6 @@ spec:
       containers:
       - image: cassandra:4.0.5
         name: cassandra-db
-        ports:
-        - containerPort: 7000
-          name: intra-node
-        - containerPort: 7001
-          name: tls-intra-node
-        - containerPort: 7199
-          name: jmx
-        - containerPort: 9042
-          name: cql
-        resources:
-          limits:
-            cpu: "500m"
-            memory: 1Gi
-          requests:
-            cpu: "500m"
-            memory: 1Gi
-        securityContext:
-          capabilities:
-            add:
-            - IPC_LOCK
-        lifecycle:
-          preStop:
-            exec:
-              command: 
-              - /bin/sh
-              - -c
-              - nodetool drain
         env:
         - name: CASSANDRA_SEEDS
           value: cassandra-0
@@ -71,6 +44,26 @@ spec:
           value: "pet-store-sample-rack"
         - name: CASSANDRA_ENDPOINT_SNITCH
           value: GossipingPropertyFileSnitch
+        ports:
+        - containerPort: 7000
+          name: intra-node
+        - containerPort: 7001
+          name: tls-intra-node
+        - containerPort: 7199
+          name: jmx
+        - containerPort: 9042
+          name: cql
+        resources:
+          limits:
+            cpu: "500m"
+            memory: 1024Mi
+          requests:
+            cpu: "200m"
+            memory: 512Mi
+        securityContext:
+          capabilities:
+            add:
+            - IPC_LOCK
         startupProbe:
           exec:
             command:
@@ -89,3 +82,10 @@ spec:
             - describe cluster
           initialDelaySeconds: 15
           timeoutSeconds: 5
+        lifecycle:
+          preStop:
+            exec:
+              command: 
+              - /bin/sh
+              - -c
+              - nodetool drain

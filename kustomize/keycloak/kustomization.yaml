@@ -10,9 +10,6 @@
 # limitations under the License.
 
 resources:
-  - namespace.yaml
-  - cassandra
-  - keycloak
-  - customers
-
-namespace: pet-store-sample
+  - deployment.yaml
+  - service.yaml
+  - ingress.yaml

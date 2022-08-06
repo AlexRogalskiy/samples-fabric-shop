@@ -33,6 +33,17 @@ spec:
         ports:
         - containerPort: 8080
           name: rest-api
+        resources:
+          limits:
+            cpu: "200m"
+            memory: 0.5Gi
+          requests:
+            cpu: "100m"
+            memory: 0.2Gi
+        securityContext:
+          capabilities:
+            drop:
+            - ALL
         volumeMounts:
         - name: config-volume
           mountPath: /app/config
