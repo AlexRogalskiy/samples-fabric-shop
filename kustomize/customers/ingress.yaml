@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: customers
+  labels:
+    component: customers
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - host: api.pet-store.com
+    http:
+      paths:
+      - path: /customers
+        pathType: Prefix
+        backend:
+          service:
+            name: customers
+            port:
+              name: rest-api

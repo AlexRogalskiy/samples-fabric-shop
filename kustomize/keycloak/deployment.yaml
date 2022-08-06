@@ -3,16 +3,16 @@ kind: Deployment
 metadata:
   name: keycloak
   labels:
-    app: keycloak
+    component: keycloak
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: keycloak
+      component: keycloak
   template:
     metadata:
       labels:
-        app: keycloak
+        component: keycloak
     spec:
       containers:
       - name: keycloak
