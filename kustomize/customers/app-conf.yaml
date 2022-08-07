@@ -14,3 +14,9 @@ cassandra:
   port: 9042
   contactPoints: cassandra
   localDataCenter: pet-store-sample-dc
+
+management:
+  endpoint:
+    health:
+      probes:
+        enabled: true

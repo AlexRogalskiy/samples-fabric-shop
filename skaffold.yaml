@@ -19,6 +19,7 @@ build:
   tagPolicy:
     dateTime: {}
 deploy:
+  statusCheck: false  # Required due to https://github.com/GoogleContainerTools/skaffold/issues/5210
   kustomize:
     paths:
     - kustomize

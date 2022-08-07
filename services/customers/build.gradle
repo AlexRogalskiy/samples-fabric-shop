@@ -34,12 +34,13 @@ repositories {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web:2.7.2'
-	implementation "org.springframework.boot:spring-boot-starter-data-cassandra:2.7.2"
+	implementation 'org.springframework.boot:spring-boot-starter-data-cassandra:2.7.2'
+	implementation 'org.springframework.boot:spring-boot-starter-actuator:2.7.2'
 
 	compileOnly 'org.projectlombok:lombok:1.18.24'
 	annotationProcessor 'org.projectlombok:lombok:1.18.24'
 
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test:2.7.2'
 }
 
 tasks.named('test') {

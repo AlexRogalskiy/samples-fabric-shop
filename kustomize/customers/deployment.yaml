@@ -31,22 +31,40 @@ spec:
         - name: SPRING_CONFIG_LOCATION
           value: "/app/config/app-conf.yaml"
         ports:
-        - containerPort: 8080
-          name: rest-api
+        - name: rest-api
+          containerPort: 8080
+        volumeMounts:
+        - name: config-volume
+          mountPath: /app/config
         resources:
           limits:
-            cpu: "200m"
+            cpu: "500m"
             memory: 0.5Gi
           requests:
-            cpu: "100m"
+            cpu: "300m"
             memory: 0.2Gi
         securityContext:
           capabilities:
             drop:
             - ALL
-        volumeMounts:
-        - name: config-volume
-          mountPath: /app/config
+        startupProbe:
+          httpGet:
+            path: /actuator/health/readiness
+            port: rest-api
+          timeoutSeconds: 5
+          initialDelaySeconds: 20
+          periodSeconds: 10
+          failureThreshold: 6
+        livenessProbe:
+          httpGet:
+            path: /actuator/health/liveness
+            port: rest-api
+          periodSeconds: 3
+        readinessProbe:
+          httpGet:
+            path: /actuator/health/readiness
+            port: rest-api
+          periodSeconds: 3
       volumes:
       - name: config-volume
         configMap:

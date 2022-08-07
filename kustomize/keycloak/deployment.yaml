@@ -31,4 +31,4 @@ spec:
         readinessProbe:
           httpGet:
             path: /realms/master
-            port: 8080
+            port: http

@@ -55,32 +55,28 @@ spec:
           name: cql
         resources:
           limits:
-            cpu: "500m"
+            cpu: "1"
             memory: 1024Mi
           requests:
-            cpu: "200m"
+            cpu: "500m"
             memory: 512Mi
         securityContext:
           capabilities:
             add:
             - IPC_LOCK
         startupProbe:
-          exec:
-            command:
-            - cqlsh
-            - -e
-            - describe cluster
-          initialDelaySeconds: 10
+          tcpSocket:
+            port: cql
           timeoutSeconds: 5
-          failureThreshold: 30
+          initialDelaySeconds: 10
           periodSeconds: 10
+          failureThreshold: 30
         readinessProbe:
           exec:
             command:
             - cqlsh
             - -e
             - describe cluster
-          initialDelaySeconds: 15
           timeoutSeconds: 5
         lifecycle:
           preStop:
