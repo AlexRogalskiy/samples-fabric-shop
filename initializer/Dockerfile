@@ -9,19 +9,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-apiVersion: skaffold/v2beta29
-kind: Config
-build:
-  artifacts:
-  - image: nadunrds/samples-pet-store-customers
-    context: services/customers
-    jib: {}
-  - image: nadunrds/samples-pet-store-initializer
-    context: initializer
-  tagPolicy:
-    dateTime: {}
-deploy:
-  statusCheck: false  # Required due to https://github.com/GoogleContainerTools/skaffold/issues/5210
-  kustomize:
-    paths:
-    - kustomize
+FROM golang:1.18.5 as builder
+
+ENV GOOS=linux
+ENV GOARCH=amd64
+ENV CGO_ENABLED=0 
+
+WORKDIR /src
+COPY init.go .
+RUN go build init.go
+
+FROM alpine:3.16
+
+COPY --from=builder /src/init /init
+
+ENTRYPOINT [ "/init" ]

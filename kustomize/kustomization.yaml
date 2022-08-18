@@ -11,6 +11,7 @@
 
 resources:
   - namespace.yaml
+  - initializer
   - cassandra
   - keycloak
   - customers

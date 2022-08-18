@@ -9,19 +9,5 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-apiVersion: skaffold/v2beta29
-kind: Config
-build:
-  artifacts:
-  - image: nadunrds/samples-pet-store-customers
-    context: services/customers
-    jib: {}
-  - image: nadunrds/samples-pet-store-initializer
-    context: initializer
-  tagPolicy:
-    dateTime: {}
-deploy:
-  statusCheck: false  # Required due to https://github.com/GoogleContainerTools/skaffold/issues/5210
-  kustomize:
-    paths:
-    - kustomize
+resources:
+  - job.yaml
