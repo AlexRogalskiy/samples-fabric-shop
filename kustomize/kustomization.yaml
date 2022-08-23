@@ -11,9 +11,7 @@
 
 resources:
   - namespace.yaml
-  - initializer
   - cassandra
-  - keycloak
   - customers
 
 namespace: pet-store-sample

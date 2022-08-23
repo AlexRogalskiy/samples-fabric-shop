@@ -16,8 +16,6 @@ build:
   - image: nadunrds/samples-pet-store-customers
     context: services/customers
     jib: {}
-  - image: nadunrds/samples-pet-store-initializer
-    context: initializer
   tagPolicy:
     dateTime: {}
 deploy:
