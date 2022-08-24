@@ -11,16 +11,14 @@
  * limitations under the License.
  */
 
-package io.github.nadundesilva.samples.petstore.customers.repository;
+package io.github.nadundesilva.samples.petstore.customers.dto.credential;
 
-import java.util.Optional;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
-import org.springframework.data.cassandra.repository.CassandraRepository;
-import org.springframework.stereotype.Repository;
-
-import io.github.nadundesilva.samples.petstore.customers.model.User;
-
-@Repository
-public interface UserRepository extends CassandraRepository<User, String> {
-    public Optional<User> findByEmailAndPassword(String email, String password);
+@AllArgsConstructor
+@Getter
+public class JwtCredential {
+    
+    private String jwtToken;
 }

@@ -10,17 +10,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-package io.github.nadundesilva.samples.petstore.customers.repository;
+package io.github.nadundesilva.samples.petstore.customers.service;
 
 import java.util.Optional;
 
-import org.springframework.data.cassandra.repository.CassandraRepository;
-import org.springframework.stereotype.Repository;
+import io.github.nadundesilva.samples.petstore.customers.dto.credential.JwtCredential;
+import io.github.nadundesilva.samples.petstore.customers.dto.credential.PasswordCredential;
 
-import io.github.nadundesilva.samples.petstore.customers.model.User;
-
-@Repository
-public interface UserRepository extends CassandraRepository<User, String> {
-    public Optional<User> findByEmailAndPassword(String email, String password);
+public interface IUserService {
+    Optional<JwtCredential> authenticate(final PasswordCredential credential);
 }

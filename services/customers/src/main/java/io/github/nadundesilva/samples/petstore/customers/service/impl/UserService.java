@@ -10,34 +10,32 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.github.nadundesilva.samples.petstore.customers.controller;
+package io.github.nadundesilva.samples.petstore.customers.service.impl;
 
 import java.util.Optional;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Service;
 
 import io.github.nadundesilva.samples.petstore.customers.dto.credential.JwtCredential;
 import io.github.nadundesilva.samples.petstore.customers.dto.credential.PasswordCredential;
-import io.github.nadundesilva.samples.petstore.customers.exception.UnauthenticatedException;
+import io.github.nadundesilva.samples.petstore.customers.model.User;
+import io.github.nadundesilva.samples.petstore.customers.repository.UserRepository;
 import io.github.nadundesilva.samples.petstore.customers.service.IUserService;
 import lombok.AllArgsConstructor;
 
-@RestController
-@RequestMapping("/users")
+@Service
 @AllArgsConstructor
-public class UserController {
+public class UserService implements IUserService {
 
-	IUserService userService;
+    private final UserRepository repository;
 
-    @PostMapping("/authenticate")
-	public JwtCredential index(@RequestBody PasswordCredential credential) throws UnauthenticatedException {
-		Optional<JwtCredential> jwt = userService.authenticate(credential);
-        if (jwt.isPresent()) {
-            return jwt.get();
+    @Override
+    public Optional<JwtCredential> authenticate(final PasswordCredential credential) {
+        Optional<User> userEntity = repository.findByEmailAndPassword(credential.getEmail(),
+            credential.getPassword());
+        if (userEntity.isPresent()) {
+            
         }
-        throw new UnauthenticatedException();
-	}
+        return Optional.empty();
+    }
 }

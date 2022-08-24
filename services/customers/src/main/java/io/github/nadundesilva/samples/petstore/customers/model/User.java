@@ -11,27 +11,30 @@
  * limitations under the License.
  */
 
-package io.github.nadundesilva.samples.petstore.customers.dao;
+package io.github.nadundesilva.samples.petstore.customers.model;
 
 import org.springframework.data.cassandra.core.mapping.Column;
 import org.springframework.data.cassandra.core.mapping.PrimaryKey;
 import org.springframework.data.cassandra.core.mapping.Table;
 
-@Table("users_by_id")
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@Table("user_by_email")
+@AllArgsConstructor
+@Getter
 public class User {
 
     @PrimaryKey
-    private String id;
+    @Column("email")
+    private String email;
+
+    @Column("password")
+    private String password;
 
     @Column("first_name")
     private String firstName;
 
     @Column("last_name")
     private String lastName;
-
-    public User(final String id, final String firstName, final String lastName) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-    }
 }
