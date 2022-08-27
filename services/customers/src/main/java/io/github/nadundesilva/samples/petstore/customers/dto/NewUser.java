@@ -10,13 +10,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.github.nadundesilva.samples.petstore.customers.service;
 
-import java.util.Optional;
+package io.github.nadundesilva.samples.petstore.customers.dto;
 
-import io.github.nadundesilva.samples.petstore.customers.dto.credential.JwtCredential;
 import io.github.nadundesilva.samples.petstore.customers.dto.credential.PasswordCredential;
+import lombok.Getter;
 
-public interface IUserService {
-    Optional<JwtCredential> authenticate(final PasswordCredential credential);
+@Getter
+public class NewUser extends PasswordCredential {
+    
+    private String firstName;
+
+    private String lastName;
+
+    public NewUser(String email, String password, String firstName, String lastName) {
+        super(email, password);
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
 }

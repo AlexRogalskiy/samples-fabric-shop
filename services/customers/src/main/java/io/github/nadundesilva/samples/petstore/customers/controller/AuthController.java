@@ -14,29 +14,42 @@ package io.github.nadundesilva.samples.petstore.customers.controller;
 
 import java.util.Optional;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.github.nadundesilva.samples.petstore.customers.dto.NewUser;
+import io.github.nadundesilva.samples.petstore.customers.dto.Response;
+import io.github.nadundesilva.samples.petstore.customers.dto.Response.Status;
 import io.github.nadundesilva.samples.petstore.customers.dto.credential.JwtCredential;
 import io.github.nadundesilva.samples.petstore.customers.dto.credential.PasswordCredential;
+import io.github.nadundesilva.samples.petstore.customers.exception.AlreadyExistsException;
 import io.github.nadundesilva.samples.petstore.customers.exception.UnauthenticatedException;
-import io.github.nadundesilva.samples.petstore.customers.service.IUserService;
+import io.github.nadundesilva.samples.petstore.customers.service.UserService;
 import lombok.AllArgsConstructor;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/auth")
 @AllArgsConstructor
-public class UserController {
+public class AuthController {
 
-	IUserService userService;
+	UserService userService;
+
+    @PostMapping("/register")
+	public ResponseEntity<Response<?>> register(@RequestBody NewUser user) throws AlreadyExistsException {
+		userService.register(user);
+		return ResponseEntity.accepted()
+			.body(Response.SUCCESS);
+	}
 
     @PostMapping("/authenticate")
-	public JwtCredential index(@RequestBody PasswordCredential credential) throws UnauthenticatedException {
+	public ResponseEntity<Response<JwtCredential>> authenticate(@RequestBody PasswordCredential credential) throws UnauthenticatedException {
 		Optional<JwtCredential> jwt = userService.authenticate(credential);
         if (jwt.isPresent()) {
-            return jwt.get();
+			return ResponseEntity.accepted()
+				.body(new Response<>(Status.SUCCESS, jwt.get()));
         }
         throw new UnauthenticatedException();
 	}

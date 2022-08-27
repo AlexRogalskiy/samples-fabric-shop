@@ -27,20 +27,17 @@ import lombok.Getter;
 
 @Configuration
 @EnableCassandraRepositories
+@Getter
 public class CassandraConfig extends AbstractCassandraConfiguration {
-    @Getter
     @Value("${cassandra.contactPoints}")
     private String contactPoints;
 
-    @Getter
     @Value("${cassandra.port}")
     private int port;
 
-    @Getter
     @Value("${cassandra.keyspace}")
     private String keyspaceName;
 
-    @Getter
     @Value("${cassandra.localDataCenter}")
     private String localDataCenter;
 

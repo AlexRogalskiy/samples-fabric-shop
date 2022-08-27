@@ -11,17 +11,24 @@
  * limitations under the License.
  */
 
-package io.github.nadundesilva.samples.petstore.customers.repository;
+package io.github.nadundesilva.samples.petstore.customers.dto;
 
-import java.util.Optional;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
-import org.springframework.data.cassandra.repository.CassandraRepository;
-import org.springframework.stereotype.Repository;
+@AllArgsConstructor
+@Getter
+public class Response<E> {
 
-import io.github.nadundesilva.samples.petstore.customers.model.User;
+    public static final Response<?> SUCCESS = new Response<>(Status.SUCCESS, null);
+    public static final Response<?> ERROR = new Response<>(Status.ERROR, null);
 
-@Repository
-public interface UserRepository extends CassandraRepository<User, String> {
-    public Optional<User> findByEmail(String email);
-    public Optional<User> findByEmailAndPassword(String email, String password);
+    private Status status;
+
+    private E data;
+
+    public enum Status {
+        SUCCESS,
+        ERROR
+    }
 }

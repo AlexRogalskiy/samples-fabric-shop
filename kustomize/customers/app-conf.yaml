@@ -15,6 +15,11 @@ cassandra:
   contactPoints: cassandra
   localDataCenter: pet-store-sample-dc
 
+auth:
+  jwt:
+    audience: pet-store-sample
+    issuer: http://api.pet-store.com/customers/auth/authenticate
+
 management:
   endpoint:
     health:
