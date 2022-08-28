@@ -10,7 +10,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package io.github.nadundesilva.samples.petstore.customers.repository;
 
 import java.util.Optional;
@@ -22,6 +21,6 @@ import io.github.nadundesilva.samples.petstore.customers.model.User;
 
 @Repository
 public interface UserRepository extends CassandraRepository<User, String> {
+
     public Optional<User> findByEmail(String email);
-    public Optional<User> findByEmailAndPassword(String email, String password);
 }

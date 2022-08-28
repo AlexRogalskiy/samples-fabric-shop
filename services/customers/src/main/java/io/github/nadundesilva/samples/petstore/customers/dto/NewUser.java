@@ -10,7 +10,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package io.github.nadundesilva.samples.petstore.customers.dto;
 
 import io.github.nadundesilva.samples.petstore.customers.dto.credential.PasswordCredential;

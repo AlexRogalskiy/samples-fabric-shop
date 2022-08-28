@@ -31,8 +31,8 @@ import io.github.nadundesilva.samples.petstore.customers.service.UserService;
 import lombok.AllArgsConstructor;
 
 @RestController
-@RequestMapping("/auth")
 @AllArgsConstructor
+@RequestMapping("/auth")
 public class AuthController {
 
 	UserService userService;
@@ -48,7 +48,7 @@ public class AuthController {
 	public ResponseEntity<Response<JwtCredential>> authenticate(@RequestBody PasswordCredential credential) throws UnauthenticatedException {
 		Optional<JwtCredential> jwt = userService.authenticate(credential);
         if (jwt.isPresent()) {
-			return ResponseEntity.accepted()
+			return ResponseEntity.ok()
 				.body(new Response<>(Status.SUCCESS, jwt.get()));
         }
         throw new UnauthenticatedException();

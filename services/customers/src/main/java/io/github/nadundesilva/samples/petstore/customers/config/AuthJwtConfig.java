@@ -10,12 +10,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package io.github.nadundesilva.samples.petstore.customers.config;
 
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.NoSuchAlgorithmException;
+import java.security.PrivateKey;
+import java.security.PublicKey;
+import java.security.SecureRandom;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
@@ -32,15 +34,16 @@ public class AuthJwtConfig {
     @Value("${auth.jwt.issuer}")
     private String issuer;
 
-    private byte[] signingPrivateKey;
-    private byte[] signingPublicKey;
+    private PrivateKey signingPrivateKey;
+    private PublicKey signingPublicKey;
 
     public AuthJwtConfig() throws NoSuchAlgorithmException {
-        KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("ECDSA");
-        keyPairGenerator.initialize(2048);
+        KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("EC");
+        SecureRandom random = SecureRandom.getInstance("SHA1PRNG");
+        keyPairGenerator.initialize(256, random);
         KeyPair secretKeyPair = keyPairGenerator.generateKeyPair();
 
-        signingPrivateKey = secretKeyPair.getPrivate().getEncoded();
-        signingPublicKey = secretKeyPair.getPublic().getEncoded();
+        signingPrivateKey = secretKeyPair.getPrivate();
+        signingPublicKey = secretKeyPair.getPublic();
     }
 }

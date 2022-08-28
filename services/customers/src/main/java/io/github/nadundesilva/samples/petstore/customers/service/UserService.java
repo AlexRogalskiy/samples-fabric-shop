@@ -16,10 +16,9 @@ import java.security.Key;
 import java.sql.Date;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
-
-import javax.crypto.spec.SecretKeySpec;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -44,9 +43,7 @@ public class UserService {
     public UserService(UserRepository userRepository, AuthJwtConfig authJwtConfig) {
         this.repository = userRepository;
         this.authJwtConfig = authJwtConfig;
-
-        this.key = new SecretKeySpec(authJwtConfig.getSigningPrivateKey(),
-            SignatureAlgorithm.ES512.getJcaName());
+        this.key = authJwtConfig.getSigningPrivateKey();
     }
 
     @Transactional
@@ -60,9 +57,8 @@ public class UserService {
     }
 
     public Optional<JwtCredential> authenticate(final PasswordCredential credential) {
-        Optional<User> userEntity = repository.findByEmailAndPassword(credential.getEmail(),
-            credential.getPassword());
-        if (userEntity.isPresent()) {
+        Optional<User> userEntity = repository.findByEmail(credential.getEmail());
+        if (userEntity.isPresent() && Objects.equals(credential.getPassword(), userEntity.get().getPassword())) {
             Instant now = Instant.now();
             String jwtToken = Jwts.builder()
                 .setSubject(userEntity.get().getId())
@@ -74,7 +70,7 @@ public class UserService {
                 .setExpiration(Date.from(now.plus(1, ChronoUnit.HOURS)))
                 .setAudience(authJwtConfig.getAudience())
                 .setIssuer(authJwtConfig.getIssuer())
-                .signWith(key)
+                .signWith(key, SignatureAlgorithm.ES256)
                 .compact();
             return Optional.of(new JwtCredential(jwtToken));
         }

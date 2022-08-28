@@ -10,14 +10,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package io.github.nadundesilva.samples.petstore.customers.dto;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Response<E> {
 
     public static final Response<?> SUCCESS = new Response<>(Status.SUCCESS, null);
