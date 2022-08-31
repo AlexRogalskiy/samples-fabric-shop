@@ -9,17 +9,23 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-apiVersion: skaffold/v2beta29
-kind: Config
-build:
-  artifacts:
-  - image: nadunrds/samples-pet-store-customers
-    context: services/customers
-    jib: {}
-  tagPolicy:
-    dateTime: {}
-deploy:
-  statusCheck: false  # Required due to https://github.com/GoogleContainerTools/skaffold/issues/5210
-  kustomize:
-    paths:
-    - kustomize/services
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: customers
+  labels:
+    component: customers
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - host: api.pet-store.com
+    http:
+      paths:
+      - path: /customers
+        pathType: Prefix
+        backend:
+          service:
+            name: customers
+            port:
+              name: rest-api
