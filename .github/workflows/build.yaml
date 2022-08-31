@@ -1,0 +1,118 @@
+name: Build
+
+on:
+    push:
+        branches:
+            - main
+
+jobs:
+    run-super-linter:
+        name: Run GitHub Super Linter
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v3
+              with:
+                  fetch-depth: 0
+            - name: Setup Node.js
+              uses: actions/setup-node@v3
+              with:
+                  node-version: "18.12.1"
+            - name: Setup Flutter
+              run: |
+                  sudo snap install flutter --classic
+                  flutter sdk-path
+                  flutter precache
+            - name: Lint Code Base
+              uses: github/super-linter@v4
+              env:
+                  DEFAULT_BRANCH: main
+                  GITHUB_TOKEN: ${{ github.workspace }}/checkstle.xml
+                  IGNORE_GENERATED_FILES: "true"
+                  TYPESCRIPT_DEFAULT_STYLE: prettier
+                  JAVASCRIPT_DEFAULT_STYLE: prettier
+                  KUBERNETES_KUBEVAL_OPTIONS: "--ignore-missing-schemas"
+                  VALIDATE_ALL_CODEBASE: "true"
+                  VALIDATE_CPP: "false"
+                  VALIDATE_CLANG_FORMAT: "false"
+                  VALIDATE_KOTLIN: "false"
+                  VALIDATE_KOTLIN_ANDROID: "false"
+                  VALIDATE_HTML: "false"
+                  VALIDATE_JAVA: "false"
+                  VALIDATE_DART: "false"
+
+    run-codeql-analysis:
+        name: Run CodeQL Analysis
+        runs-on: ubuntu-latest
+        permissions:
+            actions: read
+            contents: read
+            security-events: write
+        strategy:
+            fail-fast: false
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v3
+            - name: Initialize CodeQL
+              uses: github/codeql-action/init@v2
+              with:
+                  languages: javascript
+            - name: Autobuild
+              uses: github/codeql-action/autobuild@v2
+            - name: Perform CodeQL Analysis
+              uses: github/codeql-action/analyze@v2
+
+    run-vulnerability-analysis:
+        name: Run Vulnerability Analysis
+        runs-on: ubuntu-20.04
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v3
+            - name: Run Trivy vulnerability scanner
+              uses: aquasecurity/trivy-action@master
+              with:
+                  scan-type: fs
+                  vuln-type: library
+                  exit-code: 1
+                  format: sarif
+                  output: trivy-results.sarif
+            - name: Upload Trivy scan results to GitHub Security tab
+              uses: github/codeql-action/upload-sarif@v2
+              if: always()
+              with:
+                  sarif_file: trivy-results.sarif
+
+    build-app:
+        name: Build App
+        runs-on: ubuntu-20.04
+        needs:
+            - run-super-linter
+            - run-codeql-analysis
+            - run-vulnerability-analysis
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v3
+            - uses: actions/setup-node@v3
+              with:
+                  node-version: "18.12.1"
+            - name: Setup Skaffold
+              run: |
+                  curl -Lo skaffold https://storage.googleapis.com/skaffold/releases/latest/skaffold-linux-amd64 && \
+                  sudo install skaffold /usr/local/bin/
+            - name: Setup Flutter
+              run: |
+                  sudo snap install flutter --classic
+                  flutter sdk-path
+                  flutter precache
+            - uses: actions/setup-java@v3
+              with:
+                distribution: 'temurin'
+                java-version: '17'
+            - name: Login to the Container Registry
+              uses: docker/login-action@v2
+              with:
+                  username: nadunrds
+                  password: ${{ secrets.docker_hub_token }}
+            - name: Build App
+              run: |
+                  skaffold build

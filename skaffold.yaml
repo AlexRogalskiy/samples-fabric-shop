@@ -11,16 +11,14 @@
 
 apiVersion: skaffold/v2beta29
 kind: Config
+metadata:
+  name: skaffold-config
 build:
   artifacts:
   - image: nadunrds/samples-pet-store-portal
     context: portal
-    hooks:
-      before:
-      - command: ["npm", "ci", "--only=production"]
-        dir: portal/server
-    docker:
-      dockerfile: Dockerfile
+    custom:
+      buildCommand: ./skaffold-builld.sh
   - image: nadunrds/samples-pet-store-customers
     context: services/customers
     jib: {}
