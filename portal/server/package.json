@@ -1,0 +1,26 @@
+{
+    "name": "pet-store",
+    "version": "1.0.0",
+    "description": "Pet Store Sample Application - Portal",
+    "author": "Nadun De Silva",
+    "homepage": "https://github.com/nadundesilva/samples-pet-store#readme",
+    "license": "Apache-2.0",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/nadundesilva/samples-pet-store.git"
+    },
+    "bugs": {
+        "url": "https://github.com/nadundesilva/samples-pet-store/issues"
+    },
+    "main": "server.js",
+    "scripts": {
+        "format": "prettier --write ."
+    },
+    "devDependencies": {
+        "prettier": "^2.7.1"
+    },
+    "dependencies": {
+        "express": "^4.18.1",
+        "morgan": "^1.10.0"
+    }
+}

@@ -13,6 +13,14 @@ apiVersion: skaffold/v2beta29
 kind: Config
 build:
   artifacts:
+  - image: nadunrds/samples-pet-store-portal
+    context: portal
+    hooks:
+      before:
+      - command: ["npm", "ci", "--only=production"]
+        dir: portal/server
+    docker:
+      dockerfile: Dockerfile
   - image: nadunrds/samples-pet-store-customers
     context: services/customers
     jib: {}
@@ -22,4 +30,14 @@ deploy:
   statusCheck: false  # Required due to https://github.com/GoogleContainerTools/skaffold/issues/5210
   kustomize:
     paths:
-    - kustomize/services
+    - kustomize/portal
+profiles:
+- name: development
+  activation:
+  - command: dev
+  patches:
+  - op: replace
+    path: /deploy/kustomize/paths/0
+    value: kustomize/services
+  - op: remove
+    path: /build/artifacts/0
