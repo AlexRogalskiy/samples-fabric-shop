@@ -10,5 +10,5 @@
 # limitations under the License.
 
 resources:
-  - stateful-set.yaml
-  - service.yaml
+- stateful-set.yaml
+- service.yaml

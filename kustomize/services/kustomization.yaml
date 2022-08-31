@@ -10,8 +10,8 @@
 # limitations under the License.
 
 resources:
-  - namespace.yaml
-  - cassandra
-  - customers
+- namespace.yaml
+- cassandra
+- customers
 
 namespace: pet-store-sample
