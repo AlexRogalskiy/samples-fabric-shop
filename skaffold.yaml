@@ -15,11 +15,11 @@ metadata:
   name: skaffold-config
 build:
   artifacts:
-  - image: nadunrds/samples-pet-store-portal
+  - image: nadunrds/samples-fabric-shop-portal
     context: portal
     custom:
       buildCommand: ./skaffold-builld.sh
-  - image: nadunrds/samples-pet-store-customers
+  - image: nadunrds/samples-fabric-shop-customers
     context: services/customers
     jib: {}
   tagPolicy:

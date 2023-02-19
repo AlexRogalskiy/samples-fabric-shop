@@ -37,11 +37,11 @@ spec:
         - name: HEAP_NEWSIZE
           value: 100M
         - name: CASSANDRA_CLUSTER_NAME
-          value: "pet-store-sample-cluster"
+          value: "fabric-shop-cluster"
         - name: CASSANDRA_DC
-          value: "pet-store-sample-dc"
+          value: "fabric-shop-dc"
         - name: CASSANDRA_RACK
-          value: "pet-store-sample-rack"
+          value: "fabric-shop-rack"
         - name: CASSANDRA_ENDPOINT_SNITCH
           value: GossipingPropertyFileSnitch
         ports:

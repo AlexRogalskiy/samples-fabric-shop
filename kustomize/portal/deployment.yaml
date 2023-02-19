@@ -25,7 +25,7 @@ spec:
         component: portal
     spec:
       containers:
-      - image: nadunrds/samples-pet-store-portal
+      - image: nadunrds/samples-fabric-shop-portal
         name: portal
         ports:
         - name: portal

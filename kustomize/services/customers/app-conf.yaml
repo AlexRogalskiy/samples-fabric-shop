@@ -13,12 +13,12 @@ cassandra:
   keyspace: customers
   port: 9042
   contactPoints: cassandra
-  localDataCenter: pet-store-sample-dc
+  localDataCenter: fabric-shop-dc
 
 auth:
   jwt:
-    audience: pet-store-sample
-    issuer: http://api.pet-store.com/customers/auth/authenticate
+    audience: customers-fabric-shop
+    issuer: http://api.fabric-shop.com/customers/auth/authenticate
 
 management:
   endpoint:

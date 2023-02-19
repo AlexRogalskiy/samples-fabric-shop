@@ -14,4 +14,4 @@ resources:
 - cassandra
 - customers
 
-namespace: pet-store-sample
+namespace: samples-fabric-shop

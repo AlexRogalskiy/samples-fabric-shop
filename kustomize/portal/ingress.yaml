@@ -19,7 +19,7 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-  - host: pet-store.com
+  - host: fabric-shop.com
     http:
       paths:
       - path: /

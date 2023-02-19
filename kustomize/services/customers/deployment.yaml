@@ -25,7 +25,7 @@ spec:
         component: customers
     spec:
       containers:
-      - image: nadunrds/samples-pet-store-customers
+      - image: nadunrds/samples-fabric-shop-customers
         name: customers-service
         env:
         - name: SPRING_CONFIG_LOCATION

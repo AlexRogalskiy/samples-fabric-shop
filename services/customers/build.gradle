@@ -19,7 +19,7 @@ plugins {
     id 'checkstyle'
 }
 
-group = 'io.github.nadundesilva.samples.petstore'
+group = 'io.github.nadundesilva.samples.fabricshop'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '17'
 

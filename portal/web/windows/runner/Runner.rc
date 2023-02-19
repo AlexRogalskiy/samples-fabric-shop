@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "pet_store" "\0"
+            VALUE "FileDescription", "fabric_shop" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "pet_store" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2022 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "pet_store.exe" "\0"
-            VALUE "ProductName", "pet_store" "\0"
+            VALUE "InternalName", "fabric_shop" "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2022 io.github.nadundesilva. All rights reserved." "\0"
+            VALUE "OriginalFilename", "fabric_shop.exe" "\0"
+            VALUE "ProductName", "fabric_shop" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

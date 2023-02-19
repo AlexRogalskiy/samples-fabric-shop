@@ -1,4 +1,4 @@
-package io.github.nadundesilva.samples.petstore.customers;
+package io.github.nadundesilva.samples.fabricshop.customers;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

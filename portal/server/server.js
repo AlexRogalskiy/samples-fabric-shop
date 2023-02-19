@@ -23,5 +23,5 @@ app.use(morgan("tiny"));
 app.use(express.static("public"));
 
 app.listen(PORT, () => {
-    console.log(`Pet Store portal server listening on ${PORT}`);
+    console.log(`Fabric Shop portal server listening on ${PORT}`);
 });

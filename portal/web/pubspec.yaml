@@ -1,4 +1,4 @@
-name: pet_store
+name: fabric_shop
 description: A sample application for demonstrating microservice applications.
 
 # The following line prevents the package from being accidentally published to

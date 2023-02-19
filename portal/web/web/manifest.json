@@ -1,6 +1,6 @@
 {
-    "name": "pet_store",
-    "short_name": "pet_store",
+    "name": "fabric_shop",
+    "short_name": "fabric_shop",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

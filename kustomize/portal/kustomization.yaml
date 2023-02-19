@@ -15,4 +15,4 @@ resources:
 - service.yaml
 - ingress.yaml
 
-namespace: pet-store-sample
+namespace: samples-fabric-shop

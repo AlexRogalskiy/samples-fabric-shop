@@ -1,6 +1,6 @@
-# Sample Pet Store [WIP]
+# Sample Fabric Shop [WIP]
 
-This is a sample application of a Pet Store.
+This is a sample application of a Fabric Shop (a distributed e-commerce application).
 
 ## Pre-requisites
 

@@ -1,16 +1,16 @@
 {
-    "name": "pet-store",
+    "name": "fabric-shop",
     "version": "1.0.0",
-    "description": "Pet Store Sample Application - Portal",
+    "description": "Fabric Shop Sample Application - Portal",
     "author": "Nadun De Silva",
-    "homepage": "https://github.com/nadundesilva/samples-pet-store#readme",
+    "homepage": "https://github.com/nadundesilva/samples-fabric-shop#readme",
     "license": "Apache-2.0",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/nadundesilva/samples-pet-store.git"
+        "url": "git+https://github.com/nadundesilva/samples-fabric-shop.git"
     },
     "bugs": {
-        "url": "https://github.com/nadundesilva/samples-pet-store/issues"
+        "url": "https://github.com/nadundesilva/samples-fabric-shop/issues"
     },
     "main": "server.js",
     "scripts": {
