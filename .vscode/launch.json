@@ -1,0 +1,25 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Portal - web",
+            "cwd": "portal/web",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "Portal - web (profile mode)",
+            "cwd": "portal/web",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "Portal - web (release mode)",
+            "cwd": "portal/web",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        }
+    ]
+}
