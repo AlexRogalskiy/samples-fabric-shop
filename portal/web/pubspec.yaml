@@ -31,7 +31,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  english_words: ^4.0.0
+  go_router: ^6.0.9
   provider: ^6.0.0
 
 dev_dependencies:
